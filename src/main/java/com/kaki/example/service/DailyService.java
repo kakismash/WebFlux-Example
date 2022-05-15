@@ -16,23 +16,14 @@ import com.kaki.example.model.DailyWeather;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 public class DailyService {
+
     private WebClient webClient = WebClient.create();
 
     private String weatherURI = "https://api.weather.gov/gridpoints/MLB/33,70/forecast";
-
-    private String countriesURI = "https://api.first.org/data/v1/countries";
-
-    public Flux<String> getCountries() throws URISyntaxException {
-        return webClient.get()
-                .uri(new URI(countriesURI))
-                .retrieve()
-                .bodyToFlux(String.class);
-    }
 
     public Mono<DailyWeather> getDaily() throws URISyntaxException {
 
